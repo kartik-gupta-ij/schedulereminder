@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Todo_model = require('../models/todo');
 const User = require('../models/User');
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
-const Countries = require('Countries-Api');
+const Countries = require('countries-api');
 
 
 router.get('/', ensureGuest, (req, res) => {
