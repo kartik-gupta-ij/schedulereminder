@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/todos.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css">
+    <script type="text/javascript" src="js/lib/jquery-2.1.4.min.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <title>
+        Todo app
+    </title>
+    <link rel="icon" href=<%=userinfo.image %> type="image/icon type" style="border-radius:
+    50%;">
+
+
+</head>
+
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/profile"><img class="logo" src=<%=userinfo.image %> alt=""
+                style="border-radius:
+                50%;" width="50" height="50">
+                &nbsp;
+                <%= userinfo.firstName %>'s To-do
+            </a>
+            <a class="navbar-brand btn btn-danger btn-small" style="color: white;" href="/auth/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div id="container">
+        <h1 id="h1todo">To-Do List <i class="fa fa-plus"></i></h1>
+        <div class="newform">
+            <div class="container">
+
+                <form action="/add/todo" method="POST" novalidate class="needs-validation">
+                    <div class="mb-3">
+                        <label class="form-label" for="todo">New Todo</label>
+                        <input class="form-control" type="text" id="todo" name="todo" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="time">Select a time:</label>
+                        <input class="form-control" type="time" id="time" required name="time">
+                        <small>Click <a href="http://wa.me/+14155238886?text=join%20jack-piano"
+                                style="color: rgb(238, 15, 15); text-decoration: underline;">here</a> If you wants to
+                            Recive
+                            to updates on Whatsapp. <br>
+                            Send the message for final configuration.
+                        </small>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-success">Add To-do</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <ul>
+            <% todo.forEach(todos=>{ %>
+                <li>
+                    <a href="/delete/todo/<%=todos._id%>"><span class="deletespan"><i
+                                class="fa fa-trash"></i></span></a>
+                    <a href="/done/todo/<%=todos._id%>" <% if(todos.done==1) { %>class='completed'
+                        <% } %>>
+
+                            <%= todos.todo %>
+                                <div class="time"> <i class="fa fa-clock-o"></i>
+                                    <%= todos.time %>
+                                </div>
+
+                    </a>
+
+
+                </li>
+
+
+
+                <% }) %>
+        </ul>
+    </div>
+
+    <script type="text/javascript" src="js/todos.js"></script>
+    <script type="text/javascript" src="js/validateform.js"></script>
+</body>
+
+</html>
