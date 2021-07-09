@@ -101,7 +101,7 @@ const whats = async () => {
 
 whats()
 
-const job2 = schedule.scheduleJob('*/1 * * * * ', function () {
+const job2 = schedule.scheduleJob('jsob', '*/1 * * * * ', function () {
     const accountSid = 'ACd10c15f178ad9690eab52e97e7bb9df5';
     const authToken = 'a297a7cadf72423877555a90ddc4a95e';
     const client = require('twilio')(accountSid, authToken);
