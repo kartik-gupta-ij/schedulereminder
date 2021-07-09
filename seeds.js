@@ -29,7 +29,6 @@ const seedDB = async () => {
                 time: `0${j}:0${i}`,
                 email_: 'kartikgupta7267@gmail.com'
             })
-            console.log(todos)
             await todos.save();
         }
     }
@@ -38,12 +37,12 @@ const seedDB = async () => {
 
         for (let i = 10; i < 60; i++) {
 
-            const todos = new Todo({
+            const todoes = new Todo({
                 todo: `Task: ${i}`,
                 time: `${j}:${i}`,
                 email_: 'newcampus33@gmail.com'
             })
-            await todos.save();
+            await todoes.save();
         }
 
     }
