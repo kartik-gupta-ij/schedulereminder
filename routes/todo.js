@@ -16,7 +16,7 @@ router.post('/add/todo', (req, res) => {
         }
         newTodo.save()
             .then(() => {
-                console.log("done")
+                console.log("created")
                 DeleteCron();
                 whats();
                 res.redirect('/')
@@ -49,6 +49,7 @@ router.post('/add/todo', (req, res) => {
             } else {
                 DeleteCron();
                 whats();
+                console.log('updated')
                 res.redirect("/")
             }
         })
@@ -66,13 +67,11 @@ const whats = async () => {
             let rule = new schedule.RecurrenceRule();
 
             // your timezone
-            rule.tz = user.timezone;
+            rule.tz = user[0].timezone;
 
-            // runs at 15:00:00
             rule.second = 0;
             rule.minute = alltodo[index].time.slice(3, 5);
             rule.hour = alltodo[index].time.slice(0, 2);
-
             // { hour: alltodo[index].time.slice(0, 2), minute: alltodo[index].time.slice(3, 5), dayOfWeek: 4 }
 
             job = schedule.scheduleJob(`ID_${todo._id}`, rule, function () {
@@ -90,18 +89,14 @@ const whats = async () => {
                     .then(message => console.log(message.sid))
                     .done();
             });
-        } else {
-            console.log(todo)
         }
-
-
     });
 
 }
 
 whats()
 
-const job2 = schedule.scheduleJob('jsob', '*/1 * * * * ', function () {
+const job2 = schedule.scheduleJob('jsob', '*/7 * * * * ', function () {
     const accountSid = 'ACd10c15f178ad9690eab52e97e7bb9df5';
     const authToken = 'a297a7cadf72423877555a90ddc4a95e';
     const client = require('twilio')(accountSid, authToken);
@@ -110,7 +105,7 @@ const job2 = schedule.scheduleJob('jsob', '*/1 * * * * ', function () {
         .create({
             body: `hiiii`,
             from: 'whatsapp:+14155238886',
-            to: `whatsapp:+919125224595`
+            to: `whatsapp:+916394730782`
             // to: `whatsapp:+${user[0].callingCode}${user[0].contact}`
         })
         .then(message => console.log(message.sid))
