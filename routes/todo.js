@@ -79,7 +79,12 @@ const whats = async () => {
                 const accountSid = 'ACd10c15f178ad9690eab52e97e7bb9df5';
                 const authToken = 'a297a7cadf72423877555a90ddc4a95e';
                 const client = require('twilio')(accountSid, authToken);
-
+                console.log("its working")
+                console.log("its working")
+                console.log("its working")
+                console.log("its working")
+                console.log("its working")
+                console.log("its working")
                 client.messages
                     .create({
                         body: `${todo.todo}`,
