@@ -28,11 +28,14 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  number: {
+  callingCode: {
     type: Number
   },
   contact: {
     type: Number,
+  },
+  timezone: {
+    type: String
   }
 })
 

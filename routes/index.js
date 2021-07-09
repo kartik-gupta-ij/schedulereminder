@@ -3,6 +3,7 @@ const Todo_model = require('../models/todo');
 const User = require('../models/User');
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 const Countries = require('countries-api');
+const ct = require('countries-and-timezones');
 
 
 router.get('/', ensureGuest, (req, res) => {
@@ -18,17 +19,17 @@ router.get("/profile", ensureAuth, async (req, res) => {
     // const alldata =await Todo_model.find();
     const { firstName } = req.body;
     const { lastName } = req.body;
-    const { number } = req.body;
+    const { contact } = req.body;
     const { country } = req.body;
-    const data = Countries.findByCountryCode(country);
-    const [countryCode] = data.data[0].callingCode
-    const contact = `${countryCode}${number}`
+    const timezone = ct.getCountry(country).timezones[0];
+    const callingCode = Countries.findByCountryCode(country).data[0].callingCode[0];
     const user = await User.findById(req.user._id)
     user.firstName = firstName;
     user.lastName = lastName;
     user.contact = contact;
-    user.number = number;
-    user.displayName = `${firstName} ${lastName}`
+    user.callingCode = callingCode;
+    user.displayName = `${firstName} ${lastName}`;
+    user.timezone = timezone;
     user.save(function (err, updatedTodo) {
       if (err) {
         console.log(err);

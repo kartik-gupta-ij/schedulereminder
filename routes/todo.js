@@ -63,7 +63,19 @@ const whats = async () => {
     alltodo.forEach(async (todo, index) => {
         if (!todo.done) {
             const user = await User.find({ email: todo.email_ });
-            job = schedule.scheduleJob(`ID_${todo._id}`, { hour: alltodo[index].time.slice(0, 2), minute: alltodo[index].time.slice(3, 5), dayOfWeek: 4 }, function () {
+            let rule = new schedule.RecurrenceRule();
+
+            // your timezone
+            rule.tz = user.timezone;
+
+            // runs at 15:00:00
+            rule.second = 0;
+            rule.minute = alltodo[index].time.slice(3, 5);
+            rule.hour = alltodo[index].time.slice(0, 2);
+
+            // { hour: alltodo[index].time.slice(0, 2), minute: alltodo[index].time.slice(3, 5), dayOfWeek: 4 }
+
+            job = schedule.scheduleJob(`ID_${todo._id}`, rule, function () {
                 const accountSid = 'ACd10c15f178ad9690eab52e97e7bb9df5';
                 const authToken = 'a297a7cadf72423877555a90ddc4a95e';
                 const client = require('twilio')(accountSid, authToken);
@@ -73,7 +85,7 @@ const whats = async () => {
                         body: `${todo.todo}`,
                         from: 'whatsapp:+14155238886',
                         // to: `whatsapp:+919125224595`
-                        to: `whatsapp:+${user[0].contact}`
+                        to: `whatsapp:+${user[0].callingCode}${user[0].contact}`
                     })
                     .then(message => console.log(message.sid))
                     .done();
