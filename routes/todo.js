@@ -92,21 +92,6 @@ const whats = async () => {
         }
     });
 
-    const job2 = schedule.scheduleJob('jsob', '*/7 * * * * ', function () {
-        const accountSid = 'ACd10c15f178ad9690eab52e97e7bb9df5';
-        const authToken = 'a297a7cadf72423877555a90ddc4a95e';
-        const client = require('twilio')(accountSid, authToken);
-
-        client.messages
-            .create({
-                body: `hiiii`,
-                from: 'whatsapp:+14155238886',
-                to: `whatsapp:+916394730782`
-                // to: `whatsapp:+${user[0].callingCode}${user[0].contact}`
-            })
-            .then(message => console.log(message.sid))
-            .done();
-    });
 
 }
 
