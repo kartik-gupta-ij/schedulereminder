@@ -111,6 +111,10 @@ const DeleteCron = () => {
 
 // http://wa.me/+14155238886?text=join%20jack-piano
 
+var http = require("http"); setInterval(function () { http.get("http://lit-beyond-933340.herokuapp.com"); }, 300000); // every 5 minutes (300000)
+
+
+
 
 
 module.exports = router;
