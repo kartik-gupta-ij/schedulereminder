@@ -12,7 +12,7 @@ const flash = require('connect-flash');
 
 var app = express();
 const PORT = process.env.PORT || 3000;
-dotenv.config({ path: './config/config.env' })
+dotenv.config({ path: './config.env' })
 // Connect to mongodb
 // mongoose.connect("mongodb://localhost/todo_list",{
 mongoose.connect(process.env.MONGO_URI, {
