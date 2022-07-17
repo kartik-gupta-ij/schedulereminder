@@ -75,8 +75,8 @@ const whats = async () => {
             // { hour: alltodo[index].time.slice(0, 2), minute: alltodo[index].time.slice(3, 5), dayOfWeek: 4 }
 
             job = schedule.scheduleJob(`ID_${todo._id}`, rule, function () {
-                const accountSid = 'ACd10c15f178ad9690eab52e97e7bb9df5';
-                const authToken = 'a297a7cadf72423877555a90ddc4a95e';
+                const accountSid = process.env.TwilioaccountSid;
+                const authToken = process.env.TwilioauthToken;
                 const client = require('twilio')(accountSid, authToken);
 
                 client.messages
